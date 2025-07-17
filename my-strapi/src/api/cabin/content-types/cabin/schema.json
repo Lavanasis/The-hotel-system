@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cabins",
+  "info": {
+    "singularName": "cabin",
+    "pluralName": "cabins",
+    "displayName": "Cabin"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": true
+    },
+    "maxCapacity": {
+      "type": "integer",
+      "max": 10
+    },
+    "regularPrice": {
+      "type": "integer"
+    },
+    "discount": {
+      "type": "integer"
+    },
+    "discription": {
+      "type": "text"
+    },
+    "bookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "cabinID"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
