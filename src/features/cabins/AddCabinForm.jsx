@@ -33,7 +33,7 @@ function AddCabinForm({ Cancel, editCabin }) {
     maxCapacity: "",
     regularPrice: "",
     discount: "",
-    discription: "",
+    description: "",
     image: "",
   });
 
@@ -45,7 +45,7 @@ function AddCabinForm({ Cancel, editCabin }) {
         maxCapacity: editCabin.maxCapacity || "",
         regularPrice: editCabin.regularPrice || "",
         discount: editCabin.discount || "",
-        discription: editCabin.discription || "",
+        description: editCabin.description || "",
         image: editCabin.image || "",
       });
       setSelectedImage(null);
@@ -57,7 +57,7 @@ function AddCabinForm({ Cancel, editCabin }) {
         maxCapacity: "",
         regularPrice: "",
         discount: "",
-        discription: "",
+        description: "",
         image: "",
       });
       setSelectedImage(null);
@@ -71,7 +71,7 @@ function AddCabinForm({ Cancel, editCabin }) {
       maxCapacity: "",
       regularPrice: "",
       discount: "",
-      discription: "",
+      description: "",
       image: "",
     });
     setSelectedImage(null);
@@ -159,7 +159,7 @@ function AddCabinForm({ Cancel, editCabin }) {
         maxCapacity: "",
         regularPrice: "",
         discount: "",
-        discription: "",
+        description: "",
         image: "",
       });
       setSelectedImage(null);
@@ -225,11 +225,11 @@ function AddCabinForm({ Cancel, editCabin }) {
         </FormRow>
         <FormRow>
           <FormGroup>
-            <Label htmlFor="discription">Discription (Optional)</Label>
+            <Label htmlFor="description">Description (Optional)</Label>
             <TextArea
-              id="discription"
-              name="discription"
-              value={formData.discription}
+              id="description"
+              name="description"
+              value={formData.description}
               onChange={ChangeHandler}
             />
           </FormGroup>

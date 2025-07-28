@@ -59,5 +59,5 @@ export const {
   useDeleteCabinMutation,
   useCreateCabinMutation,
   useUpdateCabinMutation,
-  useUploadImageMutation, // ← 别忘了导出
+  useUploadImageMutation, 
 } = cabinApi;

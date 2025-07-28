@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components';
 const StyledLogo = styled.img`
     height: 9.6rem;
@@ -9,7 +8,7 @@ const StyledLogo = styled.img`
 export default function Logo() {
   return (
     <StyledLogo
-      src="./public/logo.png"
+      src="/logo.png"
       alt="logo"
     />
   );
