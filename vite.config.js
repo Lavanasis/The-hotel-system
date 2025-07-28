@@ -11,4 +11,10 @@ export default defineConfig({
       },
     }),
   ],
+    server: {
+    allowedHosts: [
+      'localhost',
+      'transition-ln-speaker-certain.trycloudflare.com'
+    ]
+  }
 })
