@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useDeleteCabinMutation } from "../../services/cabinApi";
 import toast from "react-hot-toast";
