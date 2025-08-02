@@ -1,34 +1,31 @@
-import PropTypes from "prop-types";
-import { useDeleteCabinMutation } from "../../services/cabinApi";
-import toast from "react-hot-toast";
-import ConfirmDialog from "../../ui/ConfirmDialog";
-import { useState } from "react";
+import PropTypes from 'prop-types';
+import { useDeleteCabinMutation } from '../../services/cabinApi';
+import toast from 'react-hot-toast';
+import ConfirmDialog from '../../ui/ConfirmDialog';
+import { useOpen } from '../../hooks/useOpen';
 export default function DeleteCabin({ cabin }) {
   const [deleteCabin, { isLoading: isDeleting }] = useDeleteCabinMutation();
-  const [isOpenConfirmDialog, setIsOpenConfirmDialog] = useState(false);
+  const { isOpen, open, close } = useOpen();
 
   const DeleteHandler = async () => {
     try {
       await deleteCabin(cabin.documentId);
-      toast.success("删除成功！");
+      toast.success('删除成功！');
     } catch (err) {
-      toast.error(`删除失败：${err?.message || "未知错误"}`);
+      toast.error(`删除失败：${err?.message || '未知错误'}`);
     }
   };
 
   return (
     <>
-      <button
-        onClick={() => setIsOpenConfirmDialog(true)}
-        disabled={isDeleting}
-      >
-        {isDeleting ? "Deleting..." : "Delete"}
+      <button onClick={open} disabled={isDeleting}>
+        {isDeleting ? 'Deleting...' : 'Delete'}
       </button>
 
-      {isOpenConfirmDialog && (
+      {isOpen && (
         <ConfirmDialog
           message="确定要删除该房间吗？"
-          onClose={() => setIsOpenConfirmDialog(false)}
+          onClose={close}
           onConfirm={DeleteHandler}
           isLoading={isDeleting}
         />

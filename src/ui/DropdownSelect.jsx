@@ -1,20 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
-import {
-  ButtonContainer,
-  Button,
-  DropdownMenu,
-  DropdownItem,
-} from "../styles/DropdownStyles";
+import { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { ButtonContainer, Button, DropdownMenu, DropdownItem } from '../styles/DropdownStyles';
 
 export default function DropdownSelect({ options, initial, onSelect }) {
   const [selected, setSelected] = useState(initial);
   const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef(null); 
+  const containerRef = useRef(null);
 
-  const toggleDropdown = () => setIsOpen((open) => !open);
+  const toggleDropdown = () => setIsOpen(open => !open);
 
-  const handleSelect = (option) => {
+  const handleSelect = option => {
     setSelected(option);
     setIsOpen(false);
     onSelect(option);
@@ -22,7 +17,7 @@ export default function DropdownSelect({ options, initial, onSelect }) {
 
   // 点击外部关闭下拉菜单
   useEffect(() => {
-    const ClickOutsideHandler = (event) => {
+    const ClickOutsideHandler = event => {
       if (
         containerRef.current &&
         !containerRef.current.contains(event.target) //组件不是在下拉菜单内部
@@ -32,29 +27,27 @@ export default function DropdownSelect({ options, initial, onSelect }) {
     };
 
     if (isOpen) {
-      document.addEventListener("mousedown", ClickOutsideHandler);
-    } else {
-      document.removeEventListener("mousedown", ClickOutsideHandler);
+      document.addEventListener('mousedown', ClickOutsideHandler);
     }
 
     return () => {
-      document.removeEventListener("mousedown", ClickOutsideHandler);
+      document.removeEventListener('mousedown', ClickOutsideHandler);
     };
   }, [isOpen]);
 
   return (
     <ButtonContainer ref={containerRef}>
       <Button onClick={toggleDropdown}>
-        {selected} <span style={{ padding: "0rem 0.2rem" }}>▼</span>
+        {selected} <span style={{ padding: '0rem 0.2rem' }}>▼</span>
       </Button>
 
       {isOpen && (
         <DropdownMenu>
-          {options.map((option) => (
+          {options.map(option => (
             <DropdownItem
               key={option}
               onClick={() => handleSelect(option)}
-              style={{ fontWeight: selected === option ? "bold" : "normal" }}
+              style={{ fontWeight: selected === option ? 'bold' : 'normal' }}
             >
               {option}
             </DropdownItem>

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -10,19 +9,19 @@ const Main = styled.main`
 `;
 
 const StyledAppLayout = styled.div`
-  display:grid;
+  display: grid;
   grid-template-columns: 26rem 1fr;
   grid-template-rows: auto 1fr;
-  height:100vh;
-`
+  height: 100vh;
+`;
 
 const StyleContent = styled.div`
-  min-width:60rem;
-  margin:0 auto;
-  display:flex;
+  min-width: 60rem;
+  margin: 0 auto;
+  display: flex;
   flex-direction: column;
-  gap:3.2rem;
-`
+  gap: 3.2rem;
+`;
 export default function AppLayout() {
   return (
     <StyledAppLayout>

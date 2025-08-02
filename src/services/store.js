@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { cabinApi } from './CabinApi';
 import { settingApi } from './SettingApi';
 import { bookingApi } from './BookingApi';
-import { registerApi} from './RegisterApi';
+import { registerApi } from './RegisterApi';
 import { userApi } from './UserApi';
 export const store = configureStore({
   reducer: {
@@ -12,7 +12,7 @@ export const store = configureStore({
     [registerApi.reducerPath]: registerApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(
       cabinApi.middleware,
       settingApi.middleware,

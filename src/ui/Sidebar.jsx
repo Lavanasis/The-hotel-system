@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components';
 import Logo from './Logo';
 import MainNav from './MainNav';
@@ -8,22 +7,18 @@ const StyledSiderbar = styled.aside`
   gap: 2rem;
   background-color: --color-grey-0;
   padding: 3.2rem 2rem;
-  grid-row: 1 /-1; //让该元素在 网格的第 1 行 开始，一直延伸到最后一行(-1)。
+  grid-row: 1 /-1;
 `;
 
 const Title = styled.h1`
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
-  margin: 0; 
-  padding:0;
+  margin: 0;
+  padding: 0;
 `;
 
-
-
 export default function Sidebar() {
-
-
   return (
     <StyledSiderbar>
       <Logo />

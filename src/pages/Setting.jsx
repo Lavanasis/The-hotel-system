@@ -1,5 +1,4 @@
-import React from 'react'
-import Heading from "../styles/Heading";
+import Heading from '../styles/Heading';
 import SettingsForm from '../features/settings/SettingsForm';
 export default function Setting() {
   return (

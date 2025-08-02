@@ -1,7 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import Heading from "../../styles/Heading";
-import PropTypes from "prop-types";
+import styled from 'styled-components';
+import Heading from '../../styles/Heading';
+import PropTypes from 'prop-types';
 import {
   Area,
   AreaChart,
@@ -10,10 +9,10 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from "recharts";
-import { useDarkMode } from "../../hooks/useDarkMode";
-import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
-import { formatDateRange } from "../../utils/format";
+} from 'recharts';
+import { useDarkMode } from '../../hooks/useDarkMode';
+import { eachDayOfInterval, format, isSameDay, subDays } from 'date-fns';
+import { formatDateRange } from '../../utils/format';
 
 const StyledSalesChart = styled.div`
   grid-area: saleschart;
@@ -21,12 +20,6 @@ const StyledSalesChart = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
   padding: 1rem 1rem;
-
-  /* Hack to change grid line colors */
-  & .recharts-cartesian-grid-horizontal line,
-  & .recharts-cartesian-grid-vertical line {
-    stroke: var(--color-grey-300);
-  }
 `;
 
 function SalesChart({ bookings, numDays }) {
@@ -40,48 +33,41 @@ function SalesChart({ bookings, numDays }) {
     end: endDate,
   });
 
-
-  const data = allDates.map((date) => {
+  const data = allDates.map(date => {
     return {
-      date: format(date, "MMM dd"), //ex. 2025-07-15 => "Jul 15"
+      date: format(date, 'MMM dd'), //ex. 2025-07-15 => "Jul 15"
       totalSales: bookings
-        .filter((booking) => isSameDay(date, new Date(booking.createdAt)))
+        .filter(booking => isSameDay(date, new Date(booking.createdAt)))
         .reduce((acc, cur) => acc + cur.totalPrice, 0),
       extrasSales: bookings
-        .filter((booking) => isSameDay(date, new Date(booking.createdAt)))
+        .filter(booking => isSameDay(date, new Date(booking.createdAt)))
         .reduce((acc, cur) => acc + cur.extraPrice, 0),
     };
   });
 
   const colors = isDarkMode
     ? {
-        totalSales: { stroke: "#4f46e5", fill: "#4f46e5" },
-        extrasSales: { stroke: "#22c55e", fill: "#22c55e" },
-        text: "#e5e7eb",
-        background: "#18212f",
+        totalSales: { stroke: '#4f46e5', fill: '#4f46e5' },
+        extrasSales: { stroke: '#22c55e', fill: '#22c55e' },
+        text: '#e5e7eb',
+        background: '#18212f',
       }
     : {
-        totalSales: { stroke: "#4f46e5", fill: "#c7d2fe" },
-        extrasSales: { stroke: "#16a34a", fill: "#dcfce7" },
-        text: "#374151",
-        background: "#fff",
+        totalSales: { stroke: '#4f46e5', fill: '#c7d2fe' },
+        extrasSales: { stroke: '#16a34a', fill: '#dcfce7' },
+        text: '#374151',
+        background: '#fff',
       };
 
   return (
     <StyledSalesChart>
-      <Heading as="h2">
-        Sales from {formatDateRange(startDate, endDate)}
-      </Heading>
+      <Heading as="h2">Sales from {formatDateRange(startDate, endDate)}</Heading>
 
       <ResponsiveContainer height={300} width="100%">
         <AreaChart data={data}>
-          <XAxis
-            dataKey="date"
-            tick={{ fill: colors.text }}
-            tickLine={{ stroke: colors.text }}
-          />
+          <XAxis dataKey="date" tick={{ fill: colors.text }} tickLine={{ stroke: colors.text }} />
           <YAxis
-            tickFormatter={(value) => `$${value}`}
+            tickFormatter={value => `$${value}`}
             tick={{ fill: colors.text }}
             tickLine={{ stroke: colors.text }}
           />
@@ -104,7 +90,7 @@ function SalesChart({ bookings, numDays }) {
             stroke={colors.extrasSales.stroke}
             fill={colors.extrasSales.fill}
             strokeWidth={2}
-            name="Total sales ($)"
+            name="Extra sales ($)"
           />
         </AreaChart>
       </ResponsiveContainer>

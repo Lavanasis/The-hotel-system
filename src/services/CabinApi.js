@@ -4,22 +4,23 @@ export const cabinApi = createApi({
   reducerPath: 'cabinApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:1337/api',
-    prepareHeaders: (headers) => {
+    prepareHeaders: headers => {
       const token = localStorage.getItem('jwtToken');
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
-    }
+    },
   }),
-  endpoints: (builder) => ({
+  tagTypes: ['Cabins'],
+  endpoints: builder => ({
     getCabins: builder.query({
       query: () => 'cabins?populate=image',
       providesTags: ['Cabins'],
     }),
 
     deleteCabin: builder.mutation({
-      query: (documentId) => ({
+      query: documentId => ({
         url: `cabins/${documentId}`,
         method: 'DELETE',
       }),
@@ -27,7 +28,7 @@ export const cabinApi = createApi({
     }),
 
     createCabin: builder.mutation({
-      query: (cabinData) => ({
+      query: cabinData => ({
         url: 'cabins',
         method: 'POST',
         body: cabinData,
@@ -45,11 +46,12 @@ export const cabinApi = createApi({
     }),
 
     uploadImage: builder.mutation({
-      query: (formData) => ({
+      query: formData => ({
         url: '/upload',
         method: 'POST',
         body: formData,
       }),
+      invalidatesTags: ['Cabins'],
     }),
   }),
 });
@@ -59,5 +61,5 @@ export const {
   useDeleteCabinMutation,
   useCreateCabinMutation,
   useUpdateCabinMutation,
-  useUploadImageMutation, 
+  useUploadImageMutation,
 } = cabinApi;

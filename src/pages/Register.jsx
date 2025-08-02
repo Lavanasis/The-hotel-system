@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import RegisterForm from "../features/authentication/RegisterForm";
-import Logo from "../ui/Logo";
-import Heading from "../styles/Heading";
+import styled from 'styled-components';
+import RegisterForm from '../features/authentication/RegisterForm';
+import Logo from '../ui/Logo';
+import Heading from '../styles/Heading';
 
 const RegisterLayout = styled.main`
   min-height: 100vh;

@@ -1,6 +1,5 @@
-import React from 'react'
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 const EmptyRow = styled.div`
   grid-column: 1 / -1; // 跨越所有列
   padding: 2rem;
@@ -9,9 +8,7 @@ const EmptyRow = styled.div`
   color: var(--color-grey-600);
 `;
 export default function Empty({ datatype }) {
-  return (
-    <EmptyRow>No {datatype}</EmptyRow>
-  )
+  return <EmptyRow>No {datatype}</EmptyRow>;
 }
 Empty.propTypes = {
   datatype: PropTypes.string.isRequired,

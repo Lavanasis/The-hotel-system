@@ -3,10 +3,10 @@ import {
   HiOutlineBriefcase,
   HiOutlineCalendarDays,
   HiOutlineChartBar,
-} from "react-icons/hi2";
-import Stat from "./Stat";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+} from 'react-icons/hi2';
+import Stat from './Stat';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 const StyledStats = styled.div`
   grid-area: stats;
   display: grid;
@@ -25,34 +25,18 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
 
   // 4.
   const occupation =
-    confirmedStays.reduce((acc, cur) => acc + cur.nightsNumber, 0) /
-    (numDays * cabinCount); //入住率：总入住夜数除以所有可用的夜数总和
+    confirmedStays.reduce((acc, cur) => acc + cur.nightsNumber, 0) / (numDays * cabinCount); //入住率：总入住夜数除以所有可用的夜数总和
 
   return (
     <StyledStats>
-      <Stat
-        title="Bookings"
-        color="blue"
-        icon={<HiOutlineBriefcase />}
-        value={numBookings}
-      />
-      <Stat
-        title="Sales"
-        color="green"
-        icon={<HiOutlineBanknotes />}
-        value={`$`+sales}
-      />
-      <Stat
-        title="Check ins"
-        color="indigo"
-        icon={<HiOutlineCalendarDays />}
-        value={checkins}
-      />
+      <Stat title="Bookings" color="blue" icon={<HiOutlineBriefcase />} value={numBookings} />
+      <Stat title="Sales" color="green" icon={<HiOutlineBanknotes />} value={`$` + sales} />
+      <Stat title="Check ins" color="indigo" icon={<HiOutlineCalendarDays />} value={checkins} />
       <Stat
         title="Occupancy rate"
         color="yellow"
         icon={<HiOutlineChartBar />}
-        value={Math.round(occupation * 100) + "%"}
+        value={Math.round(occupation * 100) + '%'}
       />
     </StyledStats>
   );
@@ -62,15 +46,15 @@ Stats.propTypes = {
   bookings: PropTypes.arrayOf(
     PropTypes.shape({
       totalPrice: PropTypes.number.isRequired,
-    })
+    }),
   ).isRequired,
   confirmedStays: PropTypes.arrayOf(
     PropTypes.shape({
       nightsNumber: PropTypes.number.isRequired,
-    })
+    }),
   ).isRequired,
   numDays: PropTypes.number.isRequired,
   cabinCount: PropTypes.number.isRequired,
 };
-  
+
 export default Stats;

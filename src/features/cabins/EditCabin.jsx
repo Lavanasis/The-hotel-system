@@ -1,20 +1,17 @@
-import { useState } from "react";
-import Modal from "../../ui/Modal";
-import AddCabinForm from "./AddCabinForm";
-import PropTypes from "prop-types";
+import Modal from '../../ui/Modal';
+import AddCabinForm from './AddCabinForm';
+import PropTypes from 'prop-types';
+import { useOpen } from '../../hooks/useOpen';
 
 export default function EditCabinForm({ cabin }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openEditModal = () => setIsOpen(true);
-  const closeEditModal = () => setIsOpen(false);
+  const { isOpen, open, close } = useOpen();
 
   return (
     <>
-      <button onClick={openEditModal}>Edit</button>
+      <button onClick={open}>Edit</button>
       {isOpen && (
-        <Modal onClose={closeEditModal}>
-          <AddCabinForm Cancel={closeEditModal} editCabin={cabin} />
+        <Modal onClose={close}>
+          <AddCabinForm Cancel={close} editCabin={cabin} />
         </Modal>
       )}
     </>

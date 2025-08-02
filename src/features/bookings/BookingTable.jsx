@@ -1,13 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import More from "./More";
-import {
-  StyledTable,
-} from "../../styles/TableStyles";
-import Empty from "../../ui/Empty";
-import Tag from "../../ui/Tag";
-import { formatDateRange } from "../../utils/format";
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import More from './More';
+import { StyledTable } from '../../styles/TableStyles';
+import Empty from '../../ui/Empty';
+import Tag from '../../ui/Tag';
+import { formatDateRange } from '../../utils/format';
 const StyledTableHeader = styled.header`
   display: grid;
   grid-template-columns: 1fr 1.5fr 2fr 1fr 1fr 0.3fr;
@@ -42,7 +39,6 @@ const ChildrenText = styled.div`
 `;
 
 function BookingTable({ bookings }) {
-  
   return (
     <StyledTable>
       <StyledTableHeader>
@@ -57,18 +53,16 @@ function BookingTable({ bookings }) {
       {Array.isArray(bookings) && bookings.length === 0 ? (
         <Empty datatype="bookings" />
       ) : (
-        bookings.map((booking) => (
+        bookings.map(booking => (
           <StyleTableContent key={booking.documentId}>
-            <div>{booking.cabinID?.name || "Unknown Cabin"}</div>
+            <div>{booking.cabinID?.name || 'Unknown Cabin'}</div>
             <div>
-              <div>{booking.guestID?.fullName || "Unknown Guest"}</div>
+              <div>{booking.guestID?.fullName || 'Unknown Guest'}</div>
               <ChildrenText>{booking.guestID?.email}</ChildrenText>
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div>{formatDateRange(booking.startDate, booking.endDate)}</div>
-              <ChildrenText>
-               {booking.nightsNumber} nights
-              </ChildrenText>
+              <ChildrenText>{booking.nightsNumber} nights</ChildrenText>
             </div>
             <div>
               <Tag status={booking.bookingStatus} />

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { useGetSettingsQuery } from "../../services/SettingApi";
-import PropTypes from "prop-types";
+import { useState } from 'react';
+import styled from 'styled-components';
+import { useGetSettingsQuery } from '../../services/SettingApi';
+import PropTypes from 'prop-types';
 
 const Checkbox = styled.label`
   display: flex;
@@ -28,12 +28,10 @@ const Checkbox = styled.label`
 `;
 
 export default function Checkboxes({ booking }) {
-
-
   const [confirmPaid, setConfirmPaid] = useState(false);
   const [addBreakfast, setAddBreakfast] = useState(true);
   const { data: setting } = useGetSettingsQuery();
-  const breakfastPrice = setting?.breakfastPrice ?? "";
+  const breakfastPrice = setting?.breakfastPrice ?? '';
   if (!booking) return null;
   return (
     <div>
@@ -42,7 +40,7 @@ export default function Checkboxes({ booking }) {
           id="addbreakfast"
           type="checkbox"
           checked={addBreakfast}
-          onChange={() => setAddBreakfast((c) => !c)}
+          onChange={() => setAddBreakfast(c => !c)}
           disabled={booking.hasBreakfast}
         />
         <p>Want to add breakfast for ${breakfastPrice}?</p>
@@ -53,13 +51,12 @@ export default function Checkboxes({ booking }) {
           id="confirm"
           type="checkbox"
           checked={confirmPaid}
-          onChange={() => setConfirmPaid((c) => !c)}
+          onChange={() => setConfirmPaid(c => !c)}
           disabled={!booking.isPaid}
         />
         <p>
-          I confirm that <strong>{booking.guestID.fullName}</strong> has paid
-          the total amount of ${booking.totalPrice} (${booking.cabinPrice} cabin
-          + ${breakfastPrice} breakfast).
+          I confirm that <strong>{booking.guestID.fullName}</strong> has paid the total amount of $
+          {booking.totalPrice} (${booking.cabinPrice} cabin + ${breakfastPrice} breakfast).
         </p>
       </Checkbox>
     </div>

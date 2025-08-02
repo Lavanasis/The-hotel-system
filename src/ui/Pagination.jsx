@@ -1,8 +1,7 @@
-import React from "react";
-import { ButtonGroup } from "../styles/FormStyles";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import { ButtonGroup } from '../styles/FormStyles';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 const StyledPagination = styled.div`
   display: flex;
   justify-content: space-between;
@@ -10,21 +9,14 @@ const StyledPagination = styled.div`
   padding: 0.5rem 1rem;
   background-color: var(--color-grey-50);
   font-size: 1rem;
-  margin-top:0.5rem;
+  margin-top: 0.5rem;
   border-radius: 7px;
   border: 1px solid var(--color-grey-200);
   p {
     margin: 0;
   }
 `;
-export default function Pagination({
-  count,
-  currentPage,
-  pageSize,
-  onPageChange,
-}) {
-
-
+export default function Pagination({ count, currentPage, pageSize, onPageChange }) {
   const pageCount = Math.ceil(count / pageSize);
 
   if (pageCount <= 1) return null;
@@ -46,7 +38,7 @@ export default function Pagination({
         Showing {start} to {end} of {count} results
       </p>
       <ButtonGroup>
-        <button style={{color:"var(--color-grey-600)"} }onClick={PrevPage} disabled={currentPage === 1}>
+        <button onClick={PrevPage} disabled={currentPage === 1}>
           <HiChevronLeft />
           <span>Previous</span>
         </button>

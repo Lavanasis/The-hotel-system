@@ -1,8 +1,8 @@
-import { createPortal } from "react-dom";
-import { HiXMark } from "react-icons/hi2";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import {ButtonGroup} from "../styles/FormStyles"
+import { createPortal } from 'react-dom';
+import { HiXMark } from 'react-icons/hi2';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { ButtonGroup } from '../styles/FormStyles';
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -61,9 +61,8 @@ const Message = styled.div`
   text-align: left;
 `;
 
-export default function ConfirmDialog({ message, onClose, onConfirm,isLoading }) {
-
-  const OverlayClick = (e) => {
+export default function ConfirmDialog({ message, onClose, onConfirm, isLoading }) {
+  const OverlayClick = e => {
     if (e.target === e.currentTarget) onClose();
   };
 
@@ -85,17 +84,17 @@ export default function ConfirmDialog({ message, onClose, onConfirm,isLoading })
           <button
             onClick={onConfirm}
             style={{
-              backgroundColor: "var(--color-red-100)",
-              color: "var(--color-grey-900)",
+              backgroundColor: 'var(--color-red-100)',
+              color: 'var(--color-grey-900)',
             }}
             disabled={isLoading}
           >
-            {isLoading ? "正在加载..." : "Confirm"}
+            {isLoading ? '正在加载...' : 'Confirm'}
           </button>
         </ButtonGroup>
       </Dialog>
     </Overlay>,
-    document.body
+    document.body,
   );
 }
 

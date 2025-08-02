@@ -1,18 +1,13 @@
-import React from "react";
-import { HiDotsVertical } from "react-icons/hi";
-import styled from "styled-components";
-import { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
-import {
-  HiArrowDownOnSquare,
-  HiEye,
-  HiArrowUpOnSquare,
-  HiTrash,
-} from "react-icons/hi2";
-import useCheckOut from "../check-in-out/useCheckOut";
-import useDeleteBooking from "./useDeleteBooking";
-import ConfirmDialog from "../../ui/ConfirmDialog";
+import { HiDotsVertical } from 'react-icons/hi';
+import styled from 'styled-components';
+import { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { HiArrowDownOnSquare, HiEye, HiArrowUpOnSquare, HiTrash } from 'react-icons/hi2';
+import useCheckOut from '../check-in-out/useCheckOut';
+import useDeleteBooking from './useDeleteBooking';
+import ConfirmDialog from '../../ui/ConfirmDialog';
+
 const StyledMoreButton = styled.button`
   all: unset;
   position: relative;
@@ -68,7 +63,7 @@ export default function More({ booking }) {
   const [showDetail, setShowDetail] = useState(false);
   const containerRef = useRef(null);
   const navigate = useNavigate();
-  const {CheckOutHandler, isUpdating} = useCheckOut();
+  const { CheckOutHandler, isUpdating } = useCheckOut();
   const { DeleteHandler, isDeleting } = useDeleteBooking();
 
   const [dialogConfig, setDialogConfig] = useState({
@@ -76,13 +71,13 @@ export default function More({ booking }) {
     type: null, // 'delete' 或 'checkout'
   });
   const ShowDetailHandler = () => {
-    setShowDetail((prev) => !prev);
+    setShowDetail(prev => !prev);
   };
   const ConfirmActionHandler = async () => {
     try {
-      if (dialogConfig.type === "delete") {
+      if (dialogConfig.type === 'delete') {
         await DeleteHandler(booking);
-      } else if (dialogConfig.type === "checkout") {
+      } else if (dialogConfig.type === 'checkout') {
         await CheckOutHandler(booking);
       }
     } finally {
@@ -90,27 +85,23 @@ export default function More({ booking }) {
     }
   };
 
-  
   // 监听点击外部关闭
   useEffect(() => {
-    const ClickOutsideHandler = (event) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target)
-      ) {
+    const ClickOutsideHandler = event => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
         setShowDetail(false);
       }
     };
     if (showDetail) {
-      document.addEventListener("mousedown", ClickOutsideHandler);
+      document.addEventListener('mousedown', ClickOutsideHandler);
     }
     return () => {
-      document.removeEventListener("mousedown", ClickOutsideHandler);
+      document.removeEventListener('mousedown', ClickOutsideHandler);
     };
   }, [showDetail]);
 
   return (
-    <div ref={containerRef} style={{ position: "relative" }}>
+    <div ref={containerRef} style={{ position: 'relative' }}>
       <StyledMoreButton onClick={ShowDetailHandler}>
         <HiDotsVertical />
       </StyledMoreButton>
@@ -118,9 +109,7 @@ export default function More({ booking }) {
       {showDetail && (
         <ShowDetailMenu>
           {/* see detail */}
-          <DetailButton
-            onClick={() => navigate(`/bookings/${booking.documentId}`)}
-          >
+          <DetailButton onClick={() => navigate(`/bookings/${booking.documentId}`)}>
             <HiEye /> See detail
           </DetailButton>
 
@@ -130,7 +119,7 @@ export default function More({ booking }) {
             onClick={() =>
               setDialogConfig({
                 isOpen: true,
-                type: "delete",
+                type: 'delete',
               })
             }
           >
@@ -139,21 +128,19 @@ export default function More({ booking }) {
           </DetailButton>
 
           {/* check in */}
-          {booking.bookingStatus === "unconfirmed" && (
-            <DetailButton
-              onClick={() => navigate(`/checkin/${booking.documentId}`)}
-            >
+          {booking.bookingStatus === 'unconfirmed' && (
+            <DetailButton onClick={() => navigate(`/checkin/${booking.documentId}`)}>
               <HiArrowDownOnSquare /> Check in
             </DetailButton>
           )}
 
           {/* //check out */}
-          {booking.bookingStatus === "checked in" && (
+          {booking.bookingStatus === 'checked in' && (
             <DetailButton
               onClick={() =>
                 setDialogConfig({
                   isOpen: true,
-                  type: "checkout",
+                  type: 'checkout',
                 })
               }
             >
@@ -165,14 +152,10 @@ export default function More({ booking }) {
 
       {dialogConfig.isOpen && (
         <ConfirmDialog
-          message={
-            dialogConfig.type === "delete"
-              ? "确定要删除该预订吗？"
-              : "确定要退房吗？"
-          }
+          message={dialogConfig.type === 'delete' ? '确定要删除该预订吗？' : '确定要退房吗？'}
           onClose={() => setDialogConfig({ isOpen: false, type: null })}
           onConfirm={() => ConfirmActionHandler()}
-          isLoading={dialogConfig.type === "delete" ? isDeleting : isUpdating}
+          isLoading={dialogConfig.type === 'delete' ? isDeleting : isUpdating}
         />
       )}
     </div>
@@ -181,9 +164,7 @@ export default function More({ booking }) {
 
 More.propTypes = {
   booking: PropTypes.shape({
-    documentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-      .isRequired,
-    bookingStatus: PropTypes.oneOf(["unconfirmed", "checked in", "checked out"])
-      .isRequired,
+    documentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    bookingStatus: PropTypes.oneOf(['unconfirmed', 'checked in', 'checked out']).isRequired,
   }).isRequired,
 };

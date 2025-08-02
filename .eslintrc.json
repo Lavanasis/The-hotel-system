@@ -1,9 +1,0 @@
-{
-    "extends": [
-      "react-app",
-      "plugin:prettier/recommended"  // 必须放在最后
-    ],
-    "rules": {
-      "prettier/prettier": "error"   // 强制符合 Prettier 规则
-    }
-  }

@@ -1,4 +1,3 @@
-import React from 'react'
 //用于展示今日需要入住和退房的客人
 import styled from 'styled-components';
 import Heading from '../../styles/Heading';
@@ -22,8 +21,8 @@ const StyledTodayActivity = styled.div`
 const TodayList = styled.ul`
   overflow: scroll;
   overflow-x: hidden;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 `;
 
 export default function TodayActivity() {
@@ -34,12 +33,16 @@ export default function TodayActivity() {
       {!isLoading ? (
         activities?.length > 0 ? (
           <TodayList>
-            {activities.map((activity) => (
+            {activities.map(activity => (
               <TodayItem activity={activity} key={activity.documentId} />
             ))}
           </TodayList>
-        ) : "No activity today"
-      ) : "isLoading..."}
+        ) : (
+          'No activity today'
+        )
+      ) : (
+        'isLoading...'
+      )}
     </StyledTodayActivity>
   );
 }

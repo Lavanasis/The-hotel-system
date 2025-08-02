@@ -1,21 +1,20 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import PropTypes from "prop-types";
-import { useState } from "react";
-import useCheckOut from "../check-in-out/useCheckOut";
+import PropTypes from 'prop-types';
+import { useState } from 'react';
+import useCheckOut from '../check-in-out/useCheckOut';
 
-import { useNavigate } from "react-router-dom";
-import ConfirmDialog from "../../ui/ConfirmDialog"; 
+import { useNavigate } from 'react-router-dom';
+import ConfirmDialog from '../../ui/ConfirmDialog';
 
 const StyledTodayItem = styled.li`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
-  justify-items: space-between; 
+  justify-items: space-between;
   font-size: 1rem;
   font-weight: 500;
-  padding:0.2rem 0;
-
+  padding: 0.2rem 0;
 `;
 
 const StyledTag = styled.span`
@@ -29,17 +28,15 @@ const StyledTag = styled.span`
   white-space: nowrap;
 `;
 
-
 function TodayItem({ activity }) {
   const { documentId, bookingStatus, guestID, nightsNumber } = activity;
-  
+
   const navigate = useNavigate();
   const [dialogConfig, setDialogConfig] = useState(false);
-    const {CheckOutHandler, isUpdating} = useCheckOut();
+  const { CheckOutHandler, isUpdating } = useCheckOut();
   const ConfirmActionHandler = async () => {
     try {
-        await CheckOutHandler(activity);
-      
+      await CheckOutHandler(activity);
     } finally {
       setDialogConfig(false);
     }
@@ -47,21 +44,21 @@ function TodayItem({ activity }) {
 
   return (
     <StyledTodayItem>
-      {bookingStatus === "unconfirmed" && (
+      {bookingStatus === 'unconfirmed' && (
         <StyledTag
           style={{
-            backgroundColor: "var(--color-green-100)",
-            fontSize: "0.9rem",
+            backgroundColor: 'var(--color-green-100)',
+            fontSize: '0.9rem',
           }}
         >
           Arriving
         </StyledTag>
       )}
-      {bookingStatus === "checked in" && (
+      {bookingStatus === 'checked in' && (
         <StyledTag
           style={{
-            backgroundColor: "var(--color-blue-100)",
-            fontSize: "0.9rem",
+            backgroundColor: 'var(--color-blue-100)',
+            fontSize: '0.9rem',
           }}
         >
           Departing
@@ -71,12 +68,12 @@ function TodayItem({ activity }) {
       <div>{guestID.fullName}</div>
       <div>{nightsNumber} nights</div>
 
-      {bookingStatus === "unconfirmed" && (
+      {bookingStatus === 'unconfirmed' && (
         <button
           style={{
-            backgroundColor: "var(--color-green-100)",
-            fontSize: "0.9rem",
-            color: "var(--color-grey-900)",
+            backgroundColor: 'var(--color-green-100)',
+            fontSize: '0.9rem',
+            color: 'var(--color-grey-900)',
           }}
           onClick={() => navigate(`/checkin/${documentId}`)}
         >
@@ -84,14 +81,14 @@ function TodayItem({ activity }) {
         </button>
       )}
 
-      {bookingStatus === "checked in" && (
+      {bookingStatus === 'checked in' && (
         <button
           style={{
-            backgroundColor: "var(--color-red-100)",
-            fontSize: "0.9rem",
-            color: "var(--color-grey-900)",
+            backgroundColor: 'var(--color-red-100)',
+            fontSize: '0.9rem',
+            color: 'var(--color-grey-900)',
           }}
-          onClick={() => setDialogConfig({ type: "checkout" })}
+          onClick={() => setDialogConfig({ type: 'checkout' })}
         >
           Check out
         </button>
@@ -99,11 +96,7 @@ function TodayItem({ activity }) {
 
       {dialogConfig && (
         <ConfirmDialog
-          message={
-            dialogConfig.type === "delete"
-              ? "确定要删除该预订吗？"
-              : "确定要退房吗？"
-          }
+          message={dialogConfig.type === 'delete' ? '确定要删除该预订吗？' : '确定要退房吗？'}
           onClose={() => setDialogConfig(false)}
           onConfirm={ConfirmActionHandler}
           isLoading={isUpdating}
@@ -112,7 +105,6 @@ function TodayItem({ activity }) {
     </StyledTodayItem>
   );
 }
-
 
 TodayItem.propTypes = {
   activity: PropTypes.shape({

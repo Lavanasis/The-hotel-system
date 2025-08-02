@@ -1,39 +1,35 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import ConfirmDialog from "../../ui/ConfirmDialog";
-import { HiLogout } from "react-icons/hi";
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import ConfirmDialog from '../../ui/ConfirmDialog';
+import { HiLogout } from 'react-icons/hi';
+import { useOpen } from '../../hooks/useOpen';
 export default function Logout() {
-  const [isOpenConfirmDialog, setIsOpenConfirmDialog] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); 
+  const { isOpen, open, close } = useOpen();
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const LogoutHandler = async () => {
-    setIsLoading(true); // 
+    setIsLoading(true); //
     try {
-      localStorage.removeItem("jwtToken");
-      toast.success("已登出");
-      navigate("/login");
+      localStorage.removeItem('jwtToken');
+      toast.success('已登出');
+      navigate('/login');
     } finally {
-      setIsLoading(false); // 
-      setIsOpenConfirmDialog(false); 
+      setIsLoading(false);
+      close();
     }
   };
 
   return (
     <div>
-      <button
-        className="icon-button"
-        onClick={() => setIsOpenConfirmDialog(true)}
-        disabled={isLoading}
-      >
-        {isLoading ? "Loading..." : <HiLogout />}
+      <button className="icon-button" onClick={open} disabled={isLoading}>
+        {isLoading ? 'Loading...' : <HiLogout />}
       </button>
-      {isOpenConfirmDialog && (
+      {isOpen && (
         <ConfirmDialog
           message="确定要登出？"
-          onClose={() => setIsOpenConfirmDialog(false)}
+          onClose={close}
           onConfirm={LogoutHandler}
           isLoading={isLoading}
         />

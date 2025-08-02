@@ -4,43 +4,48 @@ export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:1337/api',
-    prepareHeaders: (headers) => {
+    prepareHeaders: headers => {
       const token = localStorage.getItem('jwtToken');
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
-    }
+    },
   }),
-  endpoints: (builder) => ({
+  tagTypes: ['User'],
+  endpoints: builder => ({
     login: builder.mutation({
       query: ({ identifier, password }) => ({
         url: '/auth/local',
         method: 'POST',
         body: {
           identifier, // 用户名或邮箱
-          password,   // 密码
+          password, // 密码
         },
-      }),
-    }),
-    updateUser: builder.mutation({
-      query: ({ id, body }) => ({
-        url: `/users/${id}`,
-        method: "PUT",
-        body,
-      }),
-    }),
-
-    uploadImage: builder.mutation({
-      query: (formData) => ({
-        url: '/upload',
-        method: 'POST',
-        body: formData
       }),
     }),
 
     getUser: builder.query({
-      query: (id) => `/users/${id}?populate=avatar`,
+      query: id => `/users/${id}?populate=avatar`,
+      providesTags: (result, error, id) => [{ type: 'User', id }],
+    }),
+
+    updateUser: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `/users/${id}?populate=avatar`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: 'User', id }],
+    }),
+
+    uploadImage: builder.mutation({
+      query: formData => ({
+        url: '/upload',
+        method: 'POST',
+        body: formData,
+      }),
+      invalidatesTags: ['User'],
     }),
 
     changePassword: builder.mutation({
@@ -62,5 +67,5 @@ export const {
   useUpdateUserMutation,
   useChangePasswordMutation,
   useUploadImageMutation,
-  useLazyGetUserQuery,  //懒加载，手动触发后才发送请求
+  useGetUserQuery,
 } = userApi;

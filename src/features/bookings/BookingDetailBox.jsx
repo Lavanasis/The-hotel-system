@@ -1,14 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   HiOutlineChatBubbleBottomCenterText,
   HiOutlineCheckCircle,
   HiOutlineCurrencyDollar,
   HiOutlineHomeModern,
-} from "react-icons/hi2";
+} from 'react-icons/hi2';
 
-import DataItem from "../../ui/DataItem";
-import PropTypes from "prop-types";
-import { formatDateRange, formatedDate } from "../../utils/format";
+import DataItem from '../../ui/DataItem';
+import PropTypes from 'prop-types';
+import { formatDateRange, formatedDate } from '../../utils/format';
 const StyledBookingDetailBox = styled.section`
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
@@ -82,9 +82,7 @@ const Footer = styled.footer`
   text-align: right;
 `;
 
-
 function BookingDetailBox({ booking }) {
-  
   if (!booking) return null;
   return (
     <div>
@@ -103,34 +101,27 @@ function BookingDetailBox({ booking }) {
           <Guest>
             <div>
               <span>Guest: {booking.guestID.fullName} </span>
-              <span>
-                {booking.guestsNumber > 1
-                  ? `+${booking.guestsNumber} guests`
-                  : ""}
-              </span>
+              <span>{booking.guestsNumber > 1 ? `+${booking.guestsNumber} guests` : ''}</span>
             </div>
             <div>&bull; {booking.guestID.email}</div>
             <div>&bull; National ID {booking.guestID.nationalID}</div>
           </Guest>
-          <DataItem
-            icon={<HiOutlineChatBubbleBottomCenterText />}
-            label="Observations"
-          >
-            {booking.observations ? booking.observations : "No observations"}
+          <DataItem icon={<HiOutlineChatBubbleBottomCenterText />} label="Observations">
+            {booking.observations ? booking.observations : 'No observations'}
           </DataItem>
 
           <DataItem icon={<HiOutlineCheckCircle />} label="Breakfast included?">
-            {booking.hasBreakfast ? "Yes" : "No"}
+            {booking.hasBreakfast ? 'Yes' : 'No'}
           </DataItem>
 
-          <Price className={booking.isPaid ? "true" : "false"}>
+          <Price className={booking.isPaid ? 'true' : 'false'}>
             <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
               {`$${booking.totalPrice}`}
               {booking.hasBreakfast &&
                 ` ($${booking.cabinPrice} cabin + $${booking.extraPrice} breakfast)`}
             </DataItem>
 
-            <p>{booking.isPaid ? "Paid" : "Will pay at property"}</p>
+            <p>{booking.isPaid ? 'Paid' : 'Will pay at property'}</p>
           </Price>
         </Content>
 
@@ -138,7 +129,6 @@ function BookingDetailBox({ booking }) {
           <p>Booked in {formatedDate(booking.createdAt)}</p>
         </Footer>
       </StyledBookingDetailBox>
-
     </div>
   );
 }

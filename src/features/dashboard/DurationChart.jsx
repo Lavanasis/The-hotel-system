@@ -1,15 +1,8 @@
-import styled from "styled-components";
-import Heading from "../../styles/Heading";
-import {
-  Cell,
-  Legend,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
-import { useDarkMode } from "../../hooks/useDarkMode";
-import PropTypes from "prop-types";
+import styled from 'styled-components';
+import Heading from '../../styles/Heading';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
+import { useDarkMode } from '../../hooks/useDarkMode';
+import PropTypes from 'prop-types';
 const ChartBox = styled.div`
   grid-area: durationchart;
   background-color: var(--color-grey-0);
@@ -17,7 +10,7 @@ const ChartBox = styled.div`
   border-radius: var(--border-radius-md);
   padding: 1rem 1rem;
   height: 100%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -25,120 +18,118 @@ const ChartBox = styled.div`
     margin-bottom: 1.2rem;
   }
 
-  & .recharts-pie-label-text { //饼图的标签文字
+  & .recharts-pie-label-text {
+    //饼图的标签文字
     font-weight: 600;
   }
 `;
 
 const startDataLight = [
   {
-    duration: "1 night",
+    duration: '1 night',
     value: 0,
-    color: "#ef4444",
+    color: '#ef4444',
   },
   {
-    duration: "2 nights",
+    duration: '2 nights',
     value: 0,
-    color: "#f97316",
+    color: '#f97316',
   },
   {
-    duration: "3 nights",
+    duration: '3 nights',
     value: 0,
-    color: "#eab308",
+    color: '#eab308',
   },
   {
-    duration: "4-5 nights",
+    duration: '4-5 nights',
     value: 0,
-    color: "#84cc16",
+    color: '#84cc16',
   },
   {
-    duration: "6-7 nights",
+    duration: '6-7 nights',
     value: 0,
-    color: "#22c55e",
+    color: '#22c55e',
   },
   {
-    duration: "8-14 nights",
+    duration: '8-14 nights',
     value: 0,
-    color: "#14b8a6",
+    color: '#14b8a6',
   },
   {
-    duration: "15-21 nights",
+    duration: '15-21 nights',
     value: 0,
-    color: "#3b82f6",
+    color: '#3b82f6',
   },
   {
-    duration: "21+ nights",
+    duration: '21+ nights',
     value: 0,
-    color: "#a855f7",
+    color: '#a855f7',
   },
 ];
 
 const startDataDark = [
   {
-    duration: "1 night",
+    duration: '1 night',
     value: 0,
-    color: "#b91c1c",
+    color: '#b91c1c',
   },
   {
-    duration: "2 nights",
+    duration: '2 nights',
     value: 0,
-    color: "#c2410c",
+    color: '#c2410c',
   },
   {
-    duration: "3 nights",
+    duration: '3 nights',
     value: 0,
-    color: "#a16207",
+    color: '#a16207',
   },
   {
-    duration: "4-5 nights",
+    duration: '4-5 nights',
     value: 0,
-    color: "#4d7c0f",
+    color: '#4d7c0f',
   },
   {
-    duration: "6-7 nights",
+    duration: '6-7 nights',
     value: 0,
-    color: "#15803d",
+    color: '#15803d',
   },
   {
-    duration: "8-14 nights",
+    duration: '8-14 nights',
     value: 0,
-    color: "#0f766e",
+    color: '#0f766e',
   },
   {
-    duration: "15-21 nights",
+    duration: '15-21 nights',
     value: 0,
-    color: "#1d4ed8",
+    color: '#1d4ed8',
   },
   {
-    duration: "21+ nights",
+    duration: '21+ nights',
     value: 0,
-    color: "#7e22ce",
+    color: '#7e22ce',
   },
 ];
 
 function prepareData(startData, confirmedStays) {
-
   function incArrayValue(arr, field) {
     //在给定的数组中，找到 duration 等于某个字段的对象，然后把它的 value 加一
-    return arr.map((obj) =>
-      obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
-    );
+    return arr.map(obj => (obj.duration === field ? { ...obj, value: obj.value + 1 } : obj));
   }
 
   const data = confirmedStays
     .reduce((arr, cur) => {
       const num = cur.nightsNumber;
-      if (num === 1) return incArrayValue(arr, "1 night");
-      if (num === 2) return incArrayValue(arr, "2 nights");
-      if (num === 3) return incArrayValue(arr, "3 nights");
-      if ([4, 5].includes(num)) return incArrayValue(arr, "4-5 nights");
-      if ([6, 7].includes(num)) return incArrayValue(arr, "6-7 nights");
-      if (num >= 8 && num <= 14) return incArrayValue(arr, "8-14 nights");
-      if (num >= 15 && num <= 21) return incArrayValue(arr, "15-21 nights");
-      if (num >= 21) return incArrayValue(arr, "21+ nights");
+      if (num === 1) return incArrayValue(arr, '1 night');
+      if (num === 2) return incArrayValue(arr, '2 nights');
+      if (num === 3) return incArrayValue(arr, '3 nights');
+      if ([4, 5].includes(num)) return incArrayValue(arr, '4-5 nights');
+      if ([6, 7].includes(num)) return incArrayValue(arr, '6-7 nights');
+      if (num >= 8 && num <= 14) return incArrayValue(arr, '8-14 nights');
+      if (num >= 15 && num <= 21) return incArrayValue(arr, '15-21 nights');
+      if (num >= 21) return incArrayValue(arr, '21+ nights');
       return arr;
     }, startData)
-    .filter((obj) => obj.value > 0);
+    .filter(obj => obj.value > 0);
 
   return data;
 }
@@ -167,7 +158,7 @@ function DurationChart({ confirmedStays }) {
             paddingAngle={3} //每个扇形之间的间隙角度
           >
             {/* 每个扇区的颜色 */}
-            {data.map((e) => (
+            {data.map(e => (
               <Cell
                 // 内部填充色
                 fill={e.color}
@@ -195,11 +186,10 @@ function DurationChart({ confirmedStays }) {
 }
 
 DurationChart.propTypes = {
-
   confirmedStays: PropTypes.arrayOf(
     PropTypes.shape({
       nightsNumber: PropTypes.number.isRequired,
-    })
+    }),
   ).isRequired,
-}
+};
 export default DurationChart;

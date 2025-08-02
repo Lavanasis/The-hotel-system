@@ -1,6 +1,6 @@
-import { createPortal } from "react-dom";
-import { HiXMark } from "react-icons/hi2";
-import styled from "styled-components";
+import { createPortal } from 'react-dom';
+import { HiXMark } from 'react-icons/hi2';
+import styled from 'styled-components';
 const StyledModal = styled.div`
   position: fixed;
   top: 50%;
@@ -52,7 +52,7 @@ const Button = styled.button`
 `;
 
 function Modal({ children, onClose }) {
-  const OverlayClick = (e) => {
+  const OverlayClick = e => {
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -66,7 +66,7 @@ function Modal({ children, onClose }) {
         <div>{children}</div>
       </StyledModal>
     </Overlay>,
-    document.body //将弹窗内容插入到 document.body（即 DOM 最顶层），避免被父组件的 overflow:hidden 或 z-index 影响
+    document.body, //将弹窗内容插入到 document.body（即 DOM 最顶层），避免被父组件的 overflow:hidden 或 z-index 影响
   );
 }
 

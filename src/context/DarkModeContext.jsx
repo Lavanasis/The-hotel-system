@@ -1,6 +1,6 @@
-import { createContext, useEffect } from "react";
-import PropTypes from "prop-types";
-import { useLocalDarkMode } from "../hooks/useLocalDarkMode"
+import { createContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import useLocalDarkMode from '../hooks/useLocalDarkMode';
 
 const DarkModeContext = createContext();
 
@@ -10,16 +10,16 @@ function DarkModeProvider({ children }) {
   useEffect(() => {
     const root = document.documentElement;
     if (isDarkMode) {
-      root.classList.add("dark-mode");
-      root.classList.remove("light-mode");
+      root.classList.add('dark-mode');
+      root.classList.remove('light-mode');
     } else {
-      root.classList.add("light-mode");
-      root.classList.remove("dark-mode");
+      root.classList.add('light-mode');
+      root.classList.remove('dark-mode');
     }
   }, [isDarkMode]);
 
   function toggleDarkMode() {
-    setIsDarkMode((prev) => !prev);
+    setIsDarkMode(prev => !prev);
   }
 
   return (

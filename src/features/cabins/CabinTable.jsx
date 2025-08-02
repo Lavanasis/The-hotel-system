@@ -1,13 +1,9 @@
-
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import EditCabin from "./EditCabin";
-import DeleteCabin from "./DeleteCabin";
-import {
-  StyledTable,
-  ButtonGroup,
-} from "../../styles/TableStyles";
-import Empty from "../../ui/Empty";
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import EditCabin from './EditCabin';
+import DeleteCabin from './DeleteCabin';
+import { StyledTable, ButtonGroup } from '../../styles/TableStyles';
+import Empty from '../../ui/Empty';
 
 export const StyledTableHeader = styled.header`
   display: grid;
@@ -65,7 +61,7 @@ function Table({ cabins }) {
       {Array.isArray(cabins) && cabins.length === 0 ? (
         <Empty datatype="cabins" />
       ) : (
-        cabins.map((cabin) => (
+        cabins.map(cabin => (
           <StyleTableContent key={cabin.documentId}>
             <ImageCell>
               {cabin.image && cabin.image.url ? (
@@ -76,20 +72,18 @@ function Table({ cabins }) {
               ) : (
                 <div
                   style={{
-                    height: "100%",
-                    width: "100%",
-                    backgroundColor: "#f0f0f0",
+                    height: '100%',
+                    width: '100%',
+                    backgroundColor: '#f0f0f0',
                   }}
                 />
               )}
             </ImageCell>
             <div>{cabin.name}</div>
-            <div style={{ whiteSpace: "nowrap" }}>
-              Up to {cabin.maxCapacity} guests
-            </div>
+            <div style={{ whiteSpace: 'nowrap' }}>Up to {cabin.maxCapacity} guests</div>
             <div>${cabin.regularPrice}</div>
             {cabin.discount ? (
-              <div style={{ color: "green" }}>${cabin.discount}</div>
+              <div style={{ color: 'green' }}>${cabin.discount}</div>
             ) : (
               <span>&mdash;</span>
             )}

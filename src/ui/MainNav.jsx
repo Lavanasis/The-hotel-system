@@ -1,14 +1,18 @@
-
-import styled from 'styled-components'
-import { NavLink } from 'react-router-dom'
-import { HiOutlineCalculator, HiOutlineCog6Tooth, HiOutlineHome, HiOutlineHomeModern} from "react-icons/hi2";
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import {
+  HiOutlineCalculator,
+  HiOutlineCog6Tooth,
+  HiOutlineHome,
+  HiOutlineHomeModern,
+} from 'react-icons/hi2';
 const StyledNav = styled.ul`
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    padding: 0rem 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 0rem 0rem;
 
-    margin:0;
+  margin: 0;
 `;
 
 const StyledNavLink = styled(NavLink)`

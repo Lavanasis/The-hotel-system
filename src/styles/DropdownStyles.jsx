@@ -1,5 +1,4 @@
-
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ButtonContainer = styled.div`
   position: relative;
@@ -32,7 +31,6 @@ export const Button = styled.button`
 
 export const DropdownMenu = styled.ul`
   position: absolute;
-  top: 100%;
   left: 0;
   width: 100%;
   background-color: var(--color-grey-0);

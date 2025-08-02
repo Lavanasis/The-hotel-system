@@ -1,8 +1,7 @@
-import React from "react";
-import AddCabinForm from "./AddCabinForm";
-import { useState } from "react";
-import styled from "styled-components";
-import Modal from "../../ui/Modal";
+import AddCabinForm from './AddCabinForm';
+import styled from 'styled-components';
+import Modal from '../../ui/Modal';
+import { useOpen } from '../../hooks/useOpen';
 const StyledButton = styled.button`
   margin-top: 2rem;
   width: 100%;
@@ -15,17 +14,13 @@ const StyledButton = styled.button`
   color: black;
 `;
 export default function AddCabin() {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const { isOpen, open, close } = useOpen();
   return (
     <div>
-      {!isOpenModal && (
-        <StyledButton onClick={() => setIsOpenModal(true)}>
-          Add new cabin
-        </StyledButton>
-      )}
-      {isOpenModal && (
-        <Modal onClose={() => setIsOpenModal(false)}>
-          <AddCabinForm Cancel={() => setIsOpenModal(false)} />
+      {!isOpen && <StyledButton onClick={open}>Add new cabin</StyledButton>}
+      {isOpen && (
+        <Modal onClose={close}>
+          <AddCabinForm Cancel={close} />
         </Modal>
       )}
     </div>

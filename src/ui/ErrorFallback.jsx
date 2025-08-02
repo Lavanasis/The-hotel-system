@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import Heading from "../styles/Heading";
-import GlobalStyles from "../styles/GlobalStyles";
-import { Button } from "../styles/FormStyles";
-import PropTypes from "prop-types";
+import styled from 'styled-components';
+import Heading from '../styles/Heading';
+import GlobalStyles from '../styles/GlobalStyles';
+import { Button } from '../styles/FormStyles';
+import PropTypes from 'prop-types';
 const StyledErrorFallback = styled.main`
   height: 100vh;
   background-color: var(--color-grey-50);
@@ -27,12 +27,12 @@ const Box = styled.div`
   }
 
   & p {
-    font-family: "Sono";
+    font-family: 'Sono';
     margin-bottom: 3.2rem;
     color: var(--color-grey-500);
   }
 `;
-function ErrorFallback({resetErrorBoundary }) {
+function ErrorFallback({ resetErrorBoundary }) {
   return (
     <>
       <GlobalStyles />
