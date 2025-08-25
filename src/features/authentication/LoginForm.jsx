@@ -28,7 +28,7 @@ function LoginForm() {
       toast.success('登陆成功！');
       navigate('/dashboard');
     } catch (err) {
-      toast.error('登录失败，请检查账号密码');
+      toast.error('登录失败，请确定已注册并检查账号密码');
     }
   };
 

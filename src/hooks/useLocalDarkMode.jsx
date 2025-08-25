@@ -8,7 +8,7 @@ export default function useLocalDarkMode() {
   });
 
   useEffect(() => {
-    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode)); //布尔值转换为字符串
+    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
 
   return [isDarkMode, setIsDarkMode];

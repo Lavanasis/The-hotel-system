@@ -24,6 +24,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route index element={<Navigate replace to="/dashboard" />} />
+          {/* 自动重定向到 /dashboard */}
           <Route
             element={
               <ProtectedRoute>
@@ -39,8 +40,7 @@ export default function App() {
             <Route path="/cabins" element={<Cabins />} />
             <Route path="/setting" element={<Setting />} />
           </Route>
-
-          <Route path="*" element={<div>404 页面不存在</div>} />
+          <Route path="*" element={<div>页面不存在</div>} />
         </Routes>
       </BrowserRouter>
       <Toaster

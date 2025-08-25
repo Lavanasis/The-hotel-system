@@ -7,8 +7,6 @@ export default function DropdownSelect({ options, initial, onSelect }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
-  const toggleDropdown = () => setIsOpen(open => !open);
-
   const handleSelect = option => {
     setSelected(option);
     setIsOpen(false);
@@ -37,7 +35,7 @@ export default function DropdownSelect({ options, initial, onSelect }) {
 
   return (
     <ButtonContainer ref={containerRef}>
-      <Button onClick={toggleDropdown}>
+      <Button onClick={() => setIsOpen(open => !open)}>
         {selected} <span style={{ padding: '0rem 0.2rem' }}>▼</span>
       </Button>
 
